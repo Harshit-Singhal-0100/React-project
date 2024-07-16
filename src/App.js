@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import { store } from "./App/store";
+import { Header } from "./components/Header";
+// import { Sidebar } from "./components/Sidebar";
+import Summary from "./components/Summary"; // Correct import statement
+import { AddTransaction } from "./components/AddTransaction";
+import { TransactionList } from "./components/TransactionList";
+import { motion } from "framer-motion";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Provider store={store}>
+      <div className="flex">
+        {/* <Sidebar /> */}
+        <motion.div
+          className="container mx-auto p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Header />
+          <AddTransaction />
+          <Summary />
+          <TransactionList />
+        </motion.div>
+      </div>
+    </Provider>
   );
 }
 
